@@ -6,7 +6,9 @@ import kart from '../../assets/images/kart.svg'
 const Header = () => (
   <HeaderBar>
     <div>
-      <img src={logo} alt="Eplay" />
+      <Link to="/">
+        <img src={logo} alt="Eplay" />
+      </Link>
       <nav>
         <Links>
           <LinkItem>
