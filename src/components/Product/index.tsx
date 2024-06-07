@@ -1,4 +1,3 @@
-import { sys } from 'typescript'
 import Tag from '../Tag'
 import { Card, Description, Title, Infos } from './styles'
 
