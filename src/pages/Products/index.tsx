@@ -3,40 +3,43 @@ import Hero from '../../components/Hero'
 import Section from '../../components/Section'
 import Gallery from '../../components/Gallery'
 import residentEvil from '../../assets/images/resident.png'
+import { useEffect, useState } from 'react'
+import { Game } from '../Home'
 
 const Products = () => {
   const { id } = useParams()
 
+  const [game, setGame] = useState<Game>()
+
+  useEffect(() => {
+    fetch(`https://fake-api-tau.vercel.app/api/eplay/jogos/${id}`)
+      .then((res) => res.json())
+      .then((res) => setGame(res))
+  }, [id])
+
+  if (!game) {
+    return <h3>Carregando...</h3>
+  }
   return (
     <>
-      <Hero />
+      <Hero game={game} />
       <Section title="Sobre o jogo" background="black">
-        <p>
-          Hogwarts Legacy é um RPG de ação imersivo e de mundo aberto ambientado
-          no mundo introduzido pela primeira vez nos livros do Harry Potter.
-          Embarque em uma jornada por locais novos e familiares enquanto explora
-          e descubra animais fantásticos, personalize seu personagem e crie
-          poções, domine o lançamento de feitiços, aprimore talentos e torne-se
-          o bruxo que deseja ser.Experimente Hogwarts da década de 1800. Seu
-          personagem é um estudante com chave de um antigo segredo que ameaça
-          destruir o mundo bruxo. Faça aliados, lute contra os bruxos das trevas
-          e decida o destino do mundo bruxo. Seu legado é o que você faz dele.
-          Viva o Inesperado.
-        </p>
+        <p>{game.description}</p>
       </Section>
       <Section title="Mais detalhes" background="gray">
         <p>
-          <strong>Plataforma:</strong> PlayStation 5 <br />
-          <strong>Desenvolvedor:</strong> Avalanche Software <br />
-          <strong>Editora:</strong> Portkey Games, subsidiária da Warner Bros.
-          Interactive Entertainment <br />
+          <strong>Plataforma:</strong> {game.details.system} <br />
+          <strong>Desenvolvedor:</strong> {game.details.developer} <br />
+          <strong>Editora:</strong> {game.details.publisher} <br />
           <strong>Idiomas:</strong> O jogo oferece suporte a diversos idiomas,
-          incluindo inglês, espanhol, francês, alemão, italiano, português,
-          entre outros. As opções de áudio e legendas podem ser ajustadas nas
-          configurações do jogo.
+          incluindo {game.details.languages.join(', ')}
         </p>
       </Section>
-      <Gallery defaultCover={residentEvil} name="nome do jogo" />
+      <Gallery
+        name={game.name}
+        defaultCover={game.media.cover}
+        items={game.media.gallery}
+      />
     </>
   )
 }
