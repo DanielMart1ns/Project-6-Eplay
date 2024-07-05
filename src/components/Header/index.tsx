@@ -1,34 +1,45 @@
 import { Link } from 'react-router-dom'
-import { HeaderBar, Links, LinkItem, LinkKart } from './styles'
+import { HeaderBar, Links, LinkItem, CartButton } from './styles'
 import logo from '../../assets/images/logo.svg'
 import kart from '../../assets/images/kart.svg'
+import { open } from '../../store/reducers/cart'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootReducer } from '../../store'
 
-const Header = () => (
-  <HeaderBar>
-    <div>
-      <Link to="/">
-        <img src={logo} alt="Eplay" />
-      </Link>
-      <nav>
-        <Links>
-          <LinkItem>
-            <Link to="/categories">Categorias</Link>
-          </LinkItem>
-          <LinkItem>
-            <a href="#">Novidades</a>
-          </LinkItem>
-          <LinkItem>
-            <a href="#">Promoções</a>
-          </LinkItem>
-        </Links>
-      </nav>
-    </div>
+const Header = () => {
+  const dispatch = useDispatch()
+  const { items } = useSelector((state: RootReducer) => state.cart)
 
-    <LinkKart href="#">
-      0 - Produtos(s)
-      <img src={kart} alt="Carrinho" />
-    </LinkKart>
-  </HeaderBar>
-)
+  const openCart = () => {
+    dispatch(open())
+  }
+  return (
+    <HeaderBar>
+      <div>
+        <Link to="/">
+          <img src={logo} alt="Eplay" />
+        </Link>
+        <nav>
+          <Links>
+            <LinkItem>
+              <Link to="/categories">Categorias</Link>
+            </LinkItem>
+            <LinkItem>
+              <a href="#">Novidades</a>
+            </LinkItem>
+            <LinkItem>
+              <a href="#">Promoções</a>
+            </LinkItem>
+          </Links>
+        </nav>
+      </div>
+
+      <CartButton onClick={openCart}>
+        {items.length} - Produtos(s)
+        <img src={kart} alt="Carrinho" />
+      </CartButton>
+    </HeaderBar>
+  )
+}
 
 export default Header
