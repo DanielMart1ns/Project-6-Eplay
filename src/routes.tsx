@@ -2,7 +2,7 @@ import { Routes, Route } from 'react-router-dom'
 
 import Home from './pages/Home'
 import Categories from './pages/Categories'
-import Products from './pages/Products'
+import Product from './pages/Product'
 import Checkout from './pages/Checkout'
 
 // const routes = createBrowserRouter([
@@ -20,7 +20,7 @@ const RoutesComponent = () => (
   <Routes>
     <Route path="/" element={<Home />} />
     <Route path="/categories" element={<Categories />} />
-    <Route path="/products/:id" element={<Products />} />
+    <Route path="/products/:id" element={<Product />} />
     <Route path="/checkout" element={<Checkout />} />
   </Routes>
 )

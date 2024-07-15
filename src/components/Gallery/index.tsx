@@ -1,10 +1,12 @@
 import { useState } from 'react'
+
 import { GalleryItems } from '../../pages/Home'
 import Section from '../Section'
-import { Items, Item, Action, Modal, ModalContent } from './styles'
 import play from '../../assets/images/play.png'
 import zoom from '../../assets/images/zoom.png'
 import close from '../../assets/images/close.png'
+
+import { Items, Item, Action, Modal, ModalContent } from './styles'
 
 type Props = {
   defaultCover: string
@@ -75,6 +77,7 @@ const Gallery = ({ defaultCover, name, items }: Props) => {
           <header>
             <h4>{name}</h4>
             <img
+              className="closeIcon"
               src={close}
               alt="Icone de fechar"
               onClick={() => {

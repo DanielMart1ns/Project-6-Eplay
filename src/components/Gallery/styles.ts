@@ -23,6 +23,7 @@ export const Action = styled.div`
 
 export const Item = styled.li`
   position: relative;
+  cursor: zoom-in;
   > img {
     border: 2px solid ${colors.white};
     border-radius: 8px;
@@ -78,6 +79,13 @@ export const ModalContent = styled.div`
       font-size: 18px;
       font-weight: bold;
     }
+  }
+
+  .closeIcon {
+    width: 16px;
+    height: 16px;
+    object-fit: cover;
+    cursor: pointer;
   }
 
   > img {

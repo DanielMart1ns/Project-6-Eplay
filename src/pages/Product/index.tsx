@@ -1,11 +1,12 @@
 import { useParams } from 'react-router-dom'
+
 import Hero from '../../components/Hero'
 import Section from '../../components/Section'
 import Gallery from '../../components/Gallery'
 
 import { useGetGameQuery } from '../../services/api'
 
-const Products = () => {
+const Product = () => {
   const { id } = useParams()
   const { data: game } = useGetGameQuery(id!)
 
@@ -36,4 +37,4 @@ const Products = () => {
   )
 }
 
-export default Products
+export default Product
