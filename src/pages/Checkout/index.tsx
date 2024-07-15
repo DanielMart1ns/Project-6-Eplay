@@ -6,9 +6,11 @@ import Card from '../../components/Card'
 import { InputGroup, Row, TabButton } from './styles'
 import barCodeIcon from '../../assets/images/barcode.png'
 import creditCardIcon from '../../assets/images/credit_card.png'
+import { usePurchaseMutation } from '../../services/api'
 
 const Checkout = () => {
   const [payWithCard, setPayWithCard] = useState(false)
+  const [purchase, { data, isLoading, isError }] = usePurchaseMutation()
   const form = useFormik({
     initialValues: {
       fullName: '',
@@ -69,7 +71,39 @@ const Checkout = () => {
       )
     }),
     onSubmit: (values) => {
-      console.log(values)
+      purchase({
+        billing: {
+          document: values.cpf,
+          email: values.email,
+          name: values.fullName
+        },
+        delivery: {
+          email: values.deliveryEmail
+        },
+        payments: {
+          installments: 1,
+          card: {
+            active: payWithCard,
+            code: Number(values.cardCode),
+            name: values.cardDisplayName,
+            number: values.cardNumber,
+            owner: {
+              document: values.cpfCardOwner,
+              name: values.cardOwner
+            },
+            expires: {
+              month: 1,
+              year: 2024
+            }
+          }
+        },
+        products: [
+          {
+            id: 1,
+            price: 10
+          }
+        ]
+      })
     }
   })
 
