@@ -10,13 +10,13 @@ type PurchasePayload = {
   products: Products[]
   billing: {
     name: string
-    document: string
     email: string
+    document: string
   }
   delivery: {
     email: string
   }
-  payments: {
+  payment: {
     card: {
       active: boolean
       owner?: {
@@ -71,7 +71,7 @@ const api = createApi({
       query: (body) => ({
         url: 'checkout',
         method: 'POST',
-        body: body
+        body
       })
     })
   })
