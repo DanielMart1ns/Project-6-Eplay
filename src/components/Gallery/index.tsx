@@ -77,7 +77,6 @@ const Gallery = ({ defaultCover, name, items }: Props) => {
           <header>
             <h4>{name}</h4>
             <img
-              className="closeIcon"
               src={closeIcon}
               alt="Icone de fechar"
               onClick={() => {

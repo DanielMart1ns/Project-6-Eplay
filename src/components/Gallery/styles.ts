@@ -79,13 +79,13 @@ export const ModalContent = styled.div`
       font-size: 18px;
       font-weight: bold;
     }
-  }
 
-  .closeIcon {
-    width: 16px;
-    height: 16px;
-    object-fit: cover;
-    cursor: pointer;
+    img {
+      width: 16px;
+      height: 16px;
+      object-fit: cover;
+      cursor: pointer;
+    }
   }
 
   > img {
